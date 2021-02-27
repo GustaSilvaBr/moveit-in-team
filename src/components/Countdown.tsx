@@ -1,9 +1,13 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useContext } from 'react';
+import {ChallengeContext} from '../contexts/ChallangeContext';
+
 import styles from '../styles/components/Countdown.module.css';
 
 let countdownTimeOut: NodeJS.Timeout;
 
 export function Countdown() {
+    const {startNewChallenge, hasChallenge} = useContext(ChallengeContext);
+
     const maxMinutes = 0.1;
     const maxSecunds = 60;
     const maxMinutesInSecunds = maxMinutes * maxSecunds;
@@ -19,6 +23,7 @@ export function Countdown() {
     const [minuteLeft, minuteRight] = String(minutes).padStart(2, '0').split('');
 
     const [secundLeft, secundRight] = String(secunds).padStart(2, '0').split('');
+    
 
     function startCountdonw() {
         setIsActive(true);
@@ -38,8 +43,12 @@ export function Countdown() {
         }else if(isActive && time === 0){
             setHasFinished(true);
             setIsActive(false);
+            startNewChallenge();
+        }else if(hasChallenge==false){
+            setHasFinished(false);
+            resetCountdown();
         }
-    }, [isActive, time]);
+    }, [isActive,hasChallenge, time]);
 
     return (
         <div>
