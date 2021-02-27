@@ -18,6 +18,7 @@ interface ChallengesContextData {
     levelUp: ()=>void;
     startNewChallenge: ()=>void;
     challengeDone: ()=>void;
+    challengeFaild: ()=>void;
 }
 
 export const ChallengeContext = createContext({} as ChallengesContextData);
@@ -50,6 +51,14 @@ export function ChallengeProvider({ children }: ChallangeProviderProps) {
         setCurrentExperience(currentExperience + challenges[challengeIndex].amount);
         setHasChallenge(false);
         setChallengeIndex(Math.floor(Math.random()*12));
+        setChallengesCompleted(challengesCompleted+1);
+
+    }
+
+    function challengeFaild(){
+        setCurrentExperience(0);
+        setHasChallenge(false);
+        setChallengeIndex(Math.floor(Math.random()*12));
     }
 
     return (
@@ -62,7 +71,8 @@ export function ChallengeProvider({ children }: ChallangeProviderProps) {
                 challenge,
                 levelUp,
                 startNewChallenge,
-                challengeDone
+                challengeDone,
+                challengeFaild,
             }}>
             {children}
         </ChallengeContext.Provider>

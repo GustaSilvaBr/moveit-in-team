@@ -14,6 +14,10 @@ export function ChallengeBox() {
         contextData.challengeDone();
     }
 
+    function chanllengeFaild(){
+        contextData.challengeFaild();
+    }
+
     return (
         <div className={styles.ChallengeBoxContainer}>
             {hasActiveChallange ? (
@@ -26,7 +30,7 @@ export function ChallengeBox() {
                     </main>
 
                     <footer>
-                        <button type="button" className={styles.challengeFailedButton}>Falhei</button>
+                        <button type="button" className={styles.challengeFailedButton} onClick={chanllengeFaild}>Falhei</button>
 
                         <button type="button" className={styles.challengeSucceedButton} onClick={challengeCompleted}>Completei</button>
                     </footer>
