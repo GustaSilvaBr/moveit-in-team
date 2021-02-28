@@ -15,11 +15,14 @@ interface ChallengesContextData {
         description: String;
         amount: number;
     };
+    experienceToNextLevel: number;
     levelUp: ()=>void;
     startNewChallenge: ()=>void;
     challengeDone: ()=>void;
     challengeFaild: ()=>void;
 }
+
+
 
 export const ChallengeContext = createContext({} as ChallengesContextData);
 
@@ -34,8 +37,10 @@ export function ChallengeProvider({ children }: ChallangeProviderProps) {
         amount:0
     });
 
-    let [challengeIndex, setChallengeIndex] = useState(Math.floor(Math.random()*12));
+    let [challengeIndex, setChallengeIndex] = useState(Math.floor(Math.random()*challenges.length));
    
+    const experienceToNextLevel = Math.pow((level +1)*4,2);
+
     function levelUp() {
         setLevel(level + 1);
     }
@@ -47,16 +52,21 @@ export function ChallengeProvider({ children }: ChallangeProviderProps) {
     }
 
     function challengeDone(){
-        console.log('done: '+challengeIndex);
-        setCurrentExperience(currentExperience + challenges[challengeIndex].amount);
         setHasChallenge(false);
         setChallengeIndex(Math.floor(Math.random()*12));
         setChallengesCompleted(challengesCompleted+1);
 
+        let finalExperience = currentExperience + challenge.amount;
+
+        if(finalExperience >= experienceToNextLevel){
+            finalExperience = finalExperience - experienceToNextLevel;
+            levelUp();
+        }
+
+        setCurrentExperience(finalExperience);
     }
 
     function challengeFaild(){
-        setCurrentExperience(0);
         setHasChallenge(false);
         setChallengeIndex(Math.floor(Math.random()*12));
     }
@@ -69,6 +79,7 @@ export function ChallengeProvider({ children }: ChallangeProviderProps) {
                 challengesCompleted,
                 hasChallenge,
                 challenge,
+                experienceToNextLevel,
                 levelUp,
                 startNewChallenge,
                 challengeDone,
