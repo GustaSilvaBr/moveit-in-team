@@ -25,6 +25,7 @@ This is a non-profit, learning-focused updatee.**
 ## Main Technologies to be learned:
   - [ ] Git && GitHub to open source project
   - [ ] Firestore database
+  - [ ] Hospedagem sincronizada com a branch main
   
 #
 
