@@ -23,10 +23,10 @@ This is a non-profit, learning-focused updatee.**
   * ReactJs
 
 ## Main Technologies to be learned:
-  - [ ] Git && GitHub to open source project
+  - [x] Git && GitHub to open source project
   - [ ] Firestore database
-  - [ ] Hospedagem sincronizada com a branch main
+  - [x] Hospedagem sincronizada com a branch main
   
 #
 
-*Last readme update:* 13/04/2022
+*Last readme update:* 23/04/2022
